@@ -1,6 +1,8 @@
 ZombieWorld.Controller.socketController = {
 
-  events: { },
+  events: { 
+    'new player': 'newPlayer'
+  },
 
   init: function(){
     ZombieWorld.socket = io.connect();
@@ -10,6 +12,12 @@ ZombieWorld.Controller.socketController = {
         ZombieWorld.socket.on(key, _.bind(self[method], self));
       }
     });
+  },
+
+  newPlayer: function(playerID){
+    if(!ZombieWorld.Players[playerID]){
+      console.log(playerID, ZombieWorld.room);
+    }
   }
 
 };

@@ -5,5 +5,7 @@ module.exports = mongoose.Schema({
   roomID: String,
   alive: Boolean,
   waiting: Boolean,
-  player: String
+  player: String,
+  x: Number,
+  y: Number
 });

@@ -3,9 +3,10 @@ var ZombieWorld = {
   Level: '', //Keeps track of the current level
   map: {}, //Set the configuration for the current map
   LevelConfig: {},
-  Controller: {},
-  Entities: {},
-  Components: {},
+  Controller:  {},
+  Entities:    {},
+  Components:  {},
+  Players:     {},
 
   Sprites: {
 

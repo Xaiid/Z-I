@@ -17,7 +17,8 @@ module.exports = {
     var user = req.body;
 
     //Set default values
-    _.extend(user, { alive: true, waiting: false, });
+    //TODO GET X and Y
+    _.extend(user, { alive: true, waiting: false, x: 50, y:50});
 
     var newUser = new User(user);
     newUser.save(onError);
