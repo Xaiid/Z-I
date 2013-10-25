@@ -13,8 +13,9 @@ $(function(){
         method: 'POST',
         url: 'user/create',
         data: user
-      }).done(function(msg){
-        console.log(msg);
+      }).done(function(user){
+        console.log(user);
+        localStorage.setItem('user', user.id);
       });
     }else{
       console.log('Please enter a username and pick a player');
