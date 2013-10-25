@@ -29,7 +29,7 @@ module.exports = {
         level:   1
       });
 
-      room.players.push(newUser.id);
+      room.players.push(newUser);
       room.save(onError);
 
       // Link user with room
