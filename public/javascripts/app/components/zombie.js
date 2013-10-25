@@ -1,4 +1,4 @@
-ZombieWorld.components.zombie = Crafty.c('Zombie', {
+ZombieWorld.Components.zombie = Crafty.c('Zombie', {
   init: function(){
     this.addComponent('Actor, Mouse');
   }
