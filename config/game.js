@@ -13,6 +13,7 @@ module.exports = {
   //Zombie controller configuration
   ZombieController: {
     name: 'Wendy',
+    ZombieController: true
   },
 
 
