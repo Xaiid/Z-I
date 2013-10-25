@@ -54,11 +54,20 @@ module.exports = {
       }
 
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
-        room.players.push(_.pick(userUpdated, 'username', '_id', 'player', 'waiting', 'alive'));
+        room.players.push(_.pick(userUpdated, 'username', '_id', 'player', 'waiting', 'alive', 'x', 'y'));
         room.save(onError);
         res.send({user: userUpdated, room: room});
       });
 
     });
+  },
+
+  getRoom: function(req, res){
+    var id = req.params.id;
+
+    Room.findOne({id: id}).exec(function(err, room){
+      res.send(room);
+    });
+
   }
 };

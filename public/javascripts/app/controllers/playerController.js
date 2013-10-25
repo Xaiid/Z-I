@@ -20,7 +20,26 @@ ZombieWorld.Controller.playerController = {
     var myPlayer = ZombieWorld.currentPlayer;
 
     if(!player.ZombieController){
-      ZombieWorld.currentPlayer.player.Entity = ZombieWorld.Entities.player(myPlayer);
+      var Entity = ZombieWorld.Entities.player(myPlayer);
+
+      Entity.fourway(player.speed)
+      .bind('NewDirection', function(data) {
+        this.stop();
+        if (data.x > 0) {
+          this.animate('walk_right', 20, -1);
+        } else if (data.x < 0) {
+          this.animate('walk_left',  20, -1);
+        } else if (data.y > 0) {
+          this.animate('walk_down',  20, -1);
+        } else if (data.y < 0) {
+          this.animate('walk_up',    20, -1);
+        } else {
+          this.stop();
+        }
+      });
+
+      ZombieWorld.currentPlayer.player.Entity = Entity;
+        
     }
   }
 
