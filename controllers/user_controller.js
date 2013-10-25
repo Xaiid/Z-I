@@ -2,6 +2,7 @@ var mongoose   = require('mongoose');
 var userSchema = require('../models/user');
 var roomSchema = require('../models/room');
 var config     = require('../config/game');
+var utilities  = require('../lib/utilities');
 
 var Room     = mongoose.model('room', roomSchema);
 var User     = mongoose.model('user', userSchema);
@@ -48,6 +49,7 @@ module.exports = {
         }
 
         _.each(zombies, function(zombie){
+          _.extend(config[zombie], {_id: utilities.guid()});
           room.zombies.push(config[zombie]);
         });
       }
