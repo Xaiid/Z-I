@@ -32,17 +32,19 @@ module.exports = {
           zombies:[],
           level: 1
         });
-        newRoom.save(onError);
-        newUser.update({roomID: newRoom.id}, onError);
+        User.findOneAndUpdate({_id: newUser.id},{roomID: newRoom.id, player:'ZombieController'}, function(err, userUpdated){
+          res.send(userUpdated);
+        });
       }
 
       if(room){
         room.players.push(newUser.id);
         room.save(onError);
-        newUser.update({roomID: room.id}, onError);
+        User.findOneAndUpdate({_id: newUser.id},{roomID: room.id}, function(err, userUpdated){
+          res.send(userUpdated);
+        });
       }
 
-      res.send(newUser);
     });
   }
 };
