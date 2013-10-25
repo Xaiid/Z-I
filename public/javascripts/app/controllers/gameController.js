@@ -41,6 +41,7 @@ ZombieWorld.Controller.gameController = {
       self.createGrid(level.grid, function(){
         ZombieWorld.Controller.socketController.init();
         ZombieWorld.Controller.playerController.init();
+        ZombieWorld.Controller.zombieController.init();
       });
     });
   },

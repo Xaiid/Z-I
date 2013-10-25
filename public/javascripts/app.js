@@ -7,7 +7,7 @@ var ZombieWorld = {
   Entities:    {},
   Components:  {},
   Players:     {},
-
+  Zombies:     {},
   Sprites: {
 
     player1: Crafty.sprite(40, "/images/player1.png", {
@@ -22,17 +22,17 @@ var ZombieWorld = {
     //   player3: [0,0]
     // }),
 
-    // zombie1: Crafty.sprite(40, "/images/zombie_1.png", {
-    //   zombie1: [0,0]
-    // }),
+    zombie1: Crafty.sprite(40, "/images/zombie_1.png", {
+      zombie1: [0,0]
+    }),
 
-    // zombie2: Crafty.sprite(40, "/images/zombie_2.png", {
-    //   zombie2: [0,0]
-    // }),
+    zombie2: Crafty.sprite(40, "/images/zombie_2.png", {
+      zombie2: [0,0]
+    }),
 
-    // zombie3: Crafty.sprite(40, "/images/zombie_3.png", {
-    //   zombie3: [0,0]
-    // })
+    zombie3: Crafty.sprite(40, "/images/zombie_3.png", {
+      zombie3: [0,0]
+    })
 
   },
 
