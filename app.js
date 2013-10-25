@@ -40,6 +40,8 @@ if ('development' == app.get('env')) {
 
 require('./routes/routes')(app);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   log('Express server listening on port ' + app.get('port'));
 });
+
+var io = require('socket.io').listen(server);

@@ -18,6 +18,8 @@ ZombieWorld.Controller.gameController = {
     Crafty.init(width, height, 'game-are');
     Crafty.background('rgb(34,168,59)');
 
+    ZombieWorld.Controller.socketController.init();
+
   }
 
 };
