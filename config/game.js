@@ -10,6 +10,11 @@ module.exports = {
     }
   },
 
+  //Zombie controller configuration
+  ZombieController: {
+    name: 'Wendy',
+  },
+
 
   //Player 1 configuration
   player1: {
