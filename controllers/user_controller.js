@@ -1,6 +1,7 @@
 var mongoose   = require('mongoose');
 var userSchema = require('../models/user');
 var roomSchema = require('../models/room');
+var config     = require('../config/game');
 
 var Room     = mongoose.model('room', roomSchema);
 var User     = mongoose.model('user', userSchema);
@@ -23,6 +24,7 @@ module.exports = {
     //Search for room available
     Room.findOne({$where: 'this.players.length < 4'}).exec(function(err, currentRoom){
 
+      var numOfZombies = config.level1.zombiesPerPlayer;
       var room = currentRoom || new Room({
         players: [],
         zombies: [],
@@ -36,6 +38,13 @@ module.exports = {
       var data = { roomID: room.id };
 
       if(!currentRoom){ data.player = 'ZombieController'; }
+
+       for(var i=0; i < numOfZombies; i++){
+         room.zombies.push('zombie' + _.random(1,3));
+       }
+        room.zombies = _.map(room.zombies, function(zombie){
+         return config[zombie];
+       });
 
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
         res.send({user: userUpdated, room: room});
