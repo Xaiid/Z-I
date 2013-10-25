@@ -16,4 +16,4 @@ module.exports = mongoose.Schema({
       distance: Number,
     },
   }
-})
+});
