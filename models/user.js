@@ -5,15 +5,5 @@ module.exports = mongoose.Schema({
   roomID: String,
   alive: Boolean,
   waiting: Boolean,
-  player: {
-    name: String,
-    speed: Number,
-    gun: {
-      name: String,
-      damage: Number,
-      speed: Number,
-      frequency: Number,
-      distance: Number,
-    },
-  }
+  player: String
 });

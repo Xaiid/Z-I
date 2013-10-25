@@ -3,10 +3,10 @@ $(function(){
     event.preventDefault();
     var user = {
       username: $('#username').val(),
-      type: $('input[type="radio"]').val()
+      player: $('input[type="radio"]').val()
     };
 
-    if(user.username && user.type){
+    if(user.username && user.player){
       $.ajax({
         method: 'POST',
         url: 'user/create',
