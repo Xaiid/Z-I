@@ -1,7 +1,10 @@
 var ZombieWorld = {
 
   Controller: {},
-  init: function(){ }
+
+  onError: function(error){
+    alert(error);
+  }
 
 };
 

@@ -1,13 +1,9 @@
 ZombieWorld.Controller.gameController = {
 
-  onError: function(error){
-    alert(error);
-  },
-
   init: function(){
     var mapConfiguration = $.ajax({type: 'GET', url: '/configuration?q=map'});
     mapConfiguration.done(this.buildLand);
-    mapConfiguration.fail(this.onError);
+    mapConfiguration.fail(ZombieWorld.onError);
   },
 
   buildLand: function(map){
