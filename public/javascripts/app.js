@@ -1,5 +1,7 @@
 var ZombieWorld = {
 
+  Level: '', //Keeps track of the current level
+  map: {}, //Set the configuration for the current map
   Controller: {},
 
   onError: function(error){
