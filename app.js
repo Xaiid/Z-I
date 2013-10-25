@@ -17,6 +17,11 @@ global.log = function(){
   console.log.bind(console).apply(console, args);
 };
 
+require('./lib/database')(function(error){
+  if(error){ throw new Error(error); }
+  log('Database connected');
+});
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
