@@ -30,7 +30,7 @@ ZombieWorld.Controller.gameController = {
   buildLand: function(map){
     var self = this;
     //This is substituted with the level background
-    Crafty.background('rgb(34,168,59)');
+    Crafty.background('rgb(30,100,100)');
 
     var gridConfiguration = $.ajax({type: 'GET', url: '/configuration?q=level'+ZombieWorld.Level});
 
@@ -50,17 +50,21 @@ ZombieWorld.Controller.gameController = {
       _.each(x, function(y, yIndex){
 
         var attrs = {
-          x: ZombieWorld.map.width * ZombieWorld.map.tile.width,
-          y: ZombieWorld.map.height * ZombieWorld.map.tile.height
+          x: xIndex * ZombieWorld.map.tile.width,
+          y: yIndex * ZombieWorld.map.tile.height,
+          w: ZombieWorld.map.tile.width,
+          h: ZombieWorld.map.tile.height
         };
 
         switch(grid[xIndex][yIndex]){
           case 0:
             Crafty.e('Free').attr(attrs);
+            break;
           case 1:
             Crafty.e('Obstacle').attr(attrs);
             break;
           case 2:
+            Crafty.e('Next').attr(attrs);
             break;
         }
       });

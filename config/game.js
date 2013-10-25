@@ -5,6 +5,14 @@ module.exports = {
     zombiesPerPlayer: 2
   },
 
+  level2: {
+    grid: require('../grids/room2')
+  },
+
+  level3: {
+    grid: require('../grids/room3')
+  },
+
   //Map configuration
   map: {
     width: 52,
