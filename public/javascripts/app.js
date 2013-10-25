@@ -1,6 +1,15 @@
 var ZombieWorld = {
-  init: function(){
-    Crafty.init(800,800, 'game-are');
-    Crafty.background('rgb(34,168,59)');
-  }
+
+  Controller: {},
+  init: function(){ }
+
 };
+
+$(function(){
+  var game = $('#game').val();
+
+  if(game === 'ready'){
+    ZombieWorld.Controller.gameController.init();
+  }
+
+});

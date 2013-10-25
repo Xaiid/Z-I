@@ -1,5 +1,16 @@
 module.exports = {
 
+  //Map configuration
+  map: {
+    width: 52,
+    height: 27,
+    tile: {
+      width: 20,
+      height: 20
+    }
+  },
+
+
   //Player 1 configuration
   player1: {
     name: 'Chicken',
