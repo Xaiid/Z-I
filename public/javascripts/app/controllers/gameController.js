@@ -35,6 +35,8 @@ ZombieWorld.Controller.gameController = {
     var gridConfiguration = $.ajax({type: 'GET', url: '/configuration?q=level'+ZombieWorld.Level});
 
     gridConfiguration.done(function(level){
+      ZombieWorld.LevelConfig = level;
+
       //Create all the crafty entities
       self.createGrid(level.grid, function(){
         ZombieWorld.Controller.socketController.init();
@@ -43,7 +45,27 @@ ZombieWorld.Controller.gameController = {
     });
   },
 
-  createGrid: function(cb){
+  createGrid: function(grid, cb){
+    _.each(grid, function(x, xIndex){
+      _.each(x, function(y, yIndex){
+
+        var attrs = {
+          x: ZombieWorld.map.width * ZombieWorld.map.tile.width,
+          y: ZombieWorld.map.height * ZombieWorld.map.tile.height
+        };
+
+        switch(grid[xIndex][yIndex]){
+          case 0:
+            Crafty.e('Free').attr(attrs);
+          case 1:
+            Crafty.e('Obstacle').attr(attrs);
+            break;
+          case 2:
+            break;
+        }
+      });
+    });
+
     return cb();
   }
 };
