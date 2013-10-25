@@ -11,9 +11,13 @@ $(function(){
     if(user.username && user.type){
       $.ajax({
         method: 'POST',
-        url: 'users/create',
+        url: 'user/create',
         data: user
+      }).done(function(msg){
+        console.log(msg);
       });
+    }else{
+      console.log('Please enter a username and pick a player');
     }
   });
 });
