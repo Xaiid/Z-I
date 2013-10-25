@@ -1,5 +1,8 @@
-ZombieWorld.Components.free = Crafty.c('Free', {
+ZombieWorld.Entities.free = Crafty.c('Free', {
   init: function(){
-    this.addComponent('Element, Mouse');
+    this.addComponent('Element, Mouse')
+    .bind('Click', function(e){
+      console.log('Click:', e);
+    });
   }
 });
