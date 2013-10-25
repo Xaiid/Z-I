@@ -33,15 +33,13 @@ module.exports = {
           level: 1
         });
         newRoom.save(onError);
-        newUser.update({roomId: newRoom.id}, onError);
-        log(user, newUser);
+        newUser.update({roomID: newRoom.id}, onError);
       }
 
       if(room){
         room.players.push(newUser.id);
         room.save(onError);
-        newUser.update({roomId: room.id}, onError);
-        log(user, newUser);
+        newUser.update({roomID: room.id}, onError);
       }
 
       res.send(newUser);
