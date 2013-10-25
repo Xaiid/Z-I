@@ -1,6 +1,8 @@
 module.exports = {
   //Level grid
-  level1: require('../grids/room1'),
+  level1: {
+    grid: require('../grids/room1')
+  },
 
   //Map configuration
   map: {

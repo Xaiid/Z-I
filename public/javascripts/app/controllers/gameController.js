@@ -34,11 +34,9 @@ ZombieWorld.Controller.gameController = {
 
     var gridConfiguration = $.ajax({type: 'GET', url: '/configuration?q=level'+ZombieWorld.Level});
 
-    gridConfiguration.done(function(grid){
-
-      console.log(grid);
+    gridConfiguration.done(function(level){
       //Create all the crafty entities
-      self.createGrid(function(){
+      self.createGrid(level.grid, function(){
         ZombieWorld.Controller.socketController.init();
         ZombieWorld.Controller.playerController.init();
       });
