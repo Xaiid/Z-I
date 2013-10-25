@@ -14,36 +14,32 @@ module.exports = {
   create: function(req, res){
     var user = req.body;
 
-    _.extend(user, {
-      alive: true,
-      waiting: false,
-    });
+    //Set default values
+    _.extend(user, { alive: true, waiting: false, });
 
     var newUser = new User(user);
     newUser.save(onError);
 
     //Search for room available
+    Room.findOne({$where: 'this.players.length < 4'}).exec(function(err, currentRoom){
 
-    Room.findOne({$where: 'this.players.length < 4'}).exec(function(err, room){
+      var room = currentRoom || new Room({
+        players: [],
+        zombies: [],
+        level:   1
+      });
 
-      if(!room){
-        var newRoom = new Room({
-          players: [newUser.id],
-          zombies:[],
-          level: 1
-        });
-        User.findOneAndUpdate({_id: newUser.id},{roomID: newRoom.id, player:'ZombieController'}, function(err, userUpdated){
-          res.send(userUpdated);
-        });
-      }
+      room.players.push(newUser.id);
+      room.save(onError);
 
-      if(room){
-        room.players.push(newUser.id);
-        room.save(onError);
-        User.findOneAndUpdate({_id: newUser.id},{roomID: room.id}, function(err, userUpdated){
-          res.send(userUpdated);
-        });
-      }
+      // Link user with room
+      var data = { roomID: room.id };
+
+      if(!currentRoom){ data.player = 'ZombieController'; }
+
+      User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
+        res.send(userUpdated);
+      });
 
     });
   }
