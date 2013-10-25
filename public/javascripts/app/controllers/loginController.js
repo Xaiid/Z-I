@@ -12,8 +12,8 @@ $(function(){
         url: 'user/create',
         data: user
       }).done(function(user){
-        console.log(user);
-        localStorage.setItem('user', user.id);
+        localStorage.setItem('user', user._id || user.id);
+        window.location.assign('/game');
       });
     }else{
       console.log('Please enter a username and pick a player');
