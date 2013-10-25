@@ -1,4 +1,5 @@
 var pagesController = require('../controllers/pages_controller');
+var user_controller = require('../controllers/user_controller');
 
 module.exports = function(app){
   app.get('/', pagesController.index.bind(pagesController));

@@ -9,6 +9,7 @@
     "express": "3.4.3",
     "underscore": "1.5.2",
     "socket.io": "0.9.16",
+    "eyes": "0.1.8",
     "jade": "*"
   }
 }
