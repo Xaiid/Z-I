@@ -44,7 +44,7 @@ module.exports = {
         log(user, newUser);
       }
 
-      res.send("yupiii");
+      res.send(newUser);
     });
   }
 };
