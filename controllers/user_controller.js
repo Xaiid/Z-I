@@ -32,7 +32,6 @@ module.exports = {
       });
 
       room.players.push(_.pick(newUser, 'username', '_id', 'player', 'waiting', 'alive'));
-      room.save(onError);
 
       // Link user with room
       var data = { roomID: room.id };
@@ -43,17 +42,17 @@ module.exports = {
         //Assign zombies per user to room
 
         var zombies = [];
+
         for(var i=0; i < numOfZombies; i++){
           zombies.push('zombie' + _.random(1,3));
         }
+
         _.each(zombies, function(zombie){
           room.zombies.push(config[zombie]);
         });
-
-        Room.findOneAndUpdate({_id: room.id}, {zombies: room.zombies}, function(err, roomUpdated){
-          log('room updated ___', roomUpdated.zombies);
-        });
       }
+
+      room.save(onError);
 
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
         res.send({user: userUpdated, room: room});
