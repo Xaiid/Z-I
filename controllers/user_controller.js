@@ -37,14 +37,23 @@ module.exports = {
       // Link user with room
       var data = { roomID: room.id };
 
-      if(!currentRoom){ data.player = 'ZombieController'; }
+      if(!currentRoom){
+        data.player = 'ZombieController'; 
+      }else{
+        //Assign zombies per user to room
 
-       for(var i=0; i < numOfZombies; i++){
-         room.zombies.push('zombie' + _.random(1,3));
-       }
-        room.zombies = _.map(room.zombies, function(zombie){
-         return config[zombie];
-       });
+        var zombies = [];
+        for(var i=0; i < numOfZombies; i++){
+          zombies.push('zombie' + _.random(1,3));
+        }
+        _.each(zombies, function(zombie){
+          room.zombies.push(config[zombie]);
+        });
+
+        Room.findOneAndUpdate({_id: room.id}, {zombies: room.zombies}, function(err, roomUpdated){
+          log('room updated ___', roomUpdated.zombies);
+        });
+      }
 
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
         res.send({user: userUpdated, room: room});
