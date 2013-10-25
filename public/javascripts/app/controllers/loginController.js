@@ -11,8 +11,9 @@ $(function(){
         method: 'POST',
         url: 'user/create',
         data: user
-      }).done(function(user){
-        localStorage.setItem('user', JSON.stringify(user));
+      }).done(function(res){
+        localStorage.setItem('user', JSON.stringify(res.user));
+        localStorage.setItem('room', JSON.stringify(res.room));
         window.location.assign('/game');
       });
     }else{

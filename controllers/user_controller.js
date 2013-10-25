@@ -38,7 +38,7 @@ module.exports = {
       if(!currentRoom){ data.player = 'ZombieController'; }
 
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
-        res.send(userUpdated);
+        res.send({user: userUpdated, room: room});
       });
 
     });
