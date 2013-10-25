@@ -8,4 +8,14 @@ module.exports = function(app){
 
   //Game actions
   app.post('/user/create', user_controller.create.bind(user_controller));
+
+  app.get('/configuration', function(req, res){
+    var configuration = require('../config/game');
+    var query         = req.query.q;
+
+    var data   = configuration[query];
+    var status = data ? 200 : 404;
+
+    res.send(status, data);
+  });
 };
