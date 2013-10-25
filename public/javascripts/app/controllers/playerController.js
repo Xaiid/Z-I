@@ -1,7 +1,8 @@
 ZombieWorld.Controller.playerController = {
 
   init: function(){
-    console.log('Load players');
+    var myID = localStorage.getItem('user');
+    console.log(myID);
   }
 
 };

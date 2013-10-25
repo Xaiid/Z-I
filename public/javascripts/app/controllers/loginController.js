@@ -1,6 +1,4 @@
 $(function(){
-  console.log("asd");
-
   $('#loginForm').submit(function(event){
     event.preventDefault();
     var user = {
