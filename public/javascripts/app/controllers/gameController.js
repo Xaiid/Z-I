@@ -64,6 +64,7 @@ ZombieWorld.Controller.gameController = {
             Crafty.e('Obstacle').attr(attrs);
             break;
           case 2:
+            Crafty.e('Next').attr(attrs);
             break;
         }
       });
