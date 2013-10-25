@@ -19,7 +19,7 @@ ZombieWorld.Controller.playerController = {
     ZombieWorld.currentPlayer.player = player;
     var myPlayer = ZombieWorld.currentPlayer;
 
-    if(!myPlayer.ZombieController){
+    if(!player.ZombieController){
       ZombieWorld.currentPlayer.player.Entity = ZombieWorld.Entities.player(myPlayer);
     }
   }

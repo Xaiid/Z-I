@@ -33,8 +33,6 @@ module.exports = {
         level:   1
       });
 
-      room.players.push(_.pick(newUser, 'username', '_id', 'player', 'waiting', 'alive'));
-
       // Link user with room
       var data = { roomID: room.id };
 
@@ -55,9 +53,9 @@ module.exports = {
         });
       }
 
-      room.save(onError);
-
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
+        room.players.push(_.pick(userUpdated, 'username', '_id', 'player', 'waiting', 'alive'));
+        room.save(onError);
         res.send({user: userUpdated, room: room});
       });
 
