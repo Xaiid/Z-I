@@ -12,7 +12,7 @@ $(function(){
         url: 'user/create',
         data: user
       }).done(function(user){
-        localStorage.setItem('user', user._id || user.id);
+        localStorage.setItem('user', JSON.stringify(user));
         window.location.assign('/game');
       });
     }else{
