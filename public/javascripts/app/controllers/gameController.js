@@ -30,7 +30,7 @@ ZombieWorld.Controller.gameController = {
   buildLand: function(map){
     var self = this;
     //This is substituted with the level background
-    Crafty.background('rgb(30,100,100)');
+    Crafty.background("url('/images/level1.png')");
 
     var gridConfiguration = $.ajax({type: 'GET', url: '/configuration?q=level'+ZombieWorld.Level});
 
