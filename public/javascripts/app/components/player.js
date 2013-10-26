@@ -1,5 +1,5 @@
 ZombieWorld.Components.player = Crafty.c('Player', {
   init: function(){
-    this.addComponent('Actor, Controls, Fourway, Socket');
+    this.addComponent('Actor, Controls, Fourway, Socket, Collision');
   }
 });
