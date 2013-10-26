@@ -1,6 +1,6 @@
 ZombieWorld.Entities.zombie = function(zombie){
 
-  return Crafty.e('Zombie, ' + zombie.type)
+  return Crafty.e('Zombie, ' + 'zombie1')
       .attr({
         x: zombie.x,
         y: zombie.y
