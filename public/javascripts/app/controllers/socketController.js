@@ -19,6 +19,7 @@ ZombieWorld.Controller.socketController = {
     $.ajax({type: 'GET', url: 'room?id='+ZombieWorld.room._id}).done(function(room){
 
       ZombieWorld.room = room;
+      localStorage.setItem('room', JSON.stringify(room));
 
       var newPlayer = _.find(room.players, function(player){
         return player._id === playerID;
