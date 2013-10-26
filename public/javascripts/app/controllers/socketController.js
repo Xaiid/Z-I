@@ -61,7 +61,7 @@ ZombieWorld.Controller.socketController = {
       switch(data.to){
 
         case 'LEFT_ARROW':
-          player.Entity.x-=player.Entity._speed;
+          player.Entity.x = data.x;
 
           if(!player.Entity.isPlaying("walk_left")){
             player.Entity.stop().animate("walk_left", 20, 1);
@@ -70,7 +70,7 @@ ZombieWorld.Controller.socketController = {
         break;
 
         case 'RIGHT_ARROW':
-          player.Entity.x+=player.Entity._speed;
+          player.Entity.x = data.x;
 
           if(!player.Entity.isPlaying("walk_right")){
             player.Entity.stop().animate("walk_right", 20, 1);
@@ -79,7 +79,7 @@ ZombieWorld.Controller.socketController = {
         break;
 
         case 'UP_ARROW':
-          player.Entity.y-=player.Entity._speed;
+          player.Entity.y = data.y;
 
           if(!player.Entity.isPlaying("walk_up")){
             player.Entity.stop().animate("walk_up", 20, 1);
@@ -88,7 +88,7 @@ ZombieWorld.Controller.socketController = {
         break;
 
         case 'DOWN_ARROW':
-          player.Entity.y+=player.Entity._speed;
+          player.Entity.y = data.y;
 
           if(!player.Entity.isPlaying("walk_down")){
             player.Entity.stop().animate("walk_down", 20, 1);

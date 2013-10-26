@@ -44,13 +44,13 @@ ZombieWorld.Controller.playerController = {
       })
       .bind("EnterFrame", function(e) {
         if(this.isDown("LEFT_ARROW")) {
-          this.emit('Move player', { to: "LEFT_ARROW",  player: myPlayer._id});
+          this.emit('Move player', { to: "LEFT_ARROW",  player: myPlayer._id, x: this.x, y: this.y});
         } else if(this.isDown("RIGHT_ARROW")) {
-          this.emit('Move player', { to: "RIGHT_ARROW", player: myPlayer._id});
+          this.emit('Move player', { to: "RIGHT_ARROW", player: myPlayer._id, x: this.x, y: this.y});
         } else if(this.isDown("UP_ARROW")) {
-          this.emit('Move player', { to: "UP_ARROW",    player: myPlayer._id});
+          this.emit('Move player', { to: "UP_ARROW",    player: myPlayer._id, x: this.x, y: this.y});
         } else if(this.isDown("DOWN_ARROW")) {
-          this.emit('Move player', { to: "DOWN_ARROW",  player: myPlayer._id});
+          this.emit('Move player', { to: "DOWN_ARROW",  player: myPlayer._id, x: this.x, y: this.y});
         }
 
       });
