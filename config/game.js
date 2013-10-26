@@ -72,6 +72,7 @@ module.exports = {
   //Zombie 1 configuration
   zombie1: {
     name: 'Mechor',
+    type: 'zombie1',
     speed: 1,
     life: 10
   },
@@ -79,6 +80,7 @@ module.exports = {
   //Zombie 2 configuration
   zombie2: {
     name: 'Gaspar',
+    type: 'zombie2',
     speed: 2,
     life: 15
   },
@@ -86,6 +88,7 @@ module.exports = {
   //Zombie 3 configuration
   zombie3: {
     name: 'Baltazar',
+    type: 'zombie3',
     speed: 1,
     life: 20
   }

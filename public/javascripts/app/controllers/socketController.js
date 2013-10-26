@@ -2,7 +2,9 @@ ZombieWorld.Controller.socketController = {
 
   events: { 
     'new player': 'newPlayer',
-    'Move player': 'move'
+    'Move player': 'move',
+    'update zombies': 'updateZombies',
+    'build zombies': 'buildZombies'
   },
 
   init: function(){
@@ -12,6 +14,25 @@ ZombieWorld.Controller.socketController = {
       if(typeof self[method] === 'function'){
         ZombieWorld.socket.on(key, _.bind(self[method], self));
       }
+    });
+  },
+
+  updateZombies: function(){
+    if(ZombieWorld.currentPlayer.type === 'ZombieController'){
+      $.ajax({type: 'PUT', url: 'room', data: ZombieWorld.room}).done(function(room){
+        ZombieWorld.socket.emit('zombies ready', {room: room._id});
+      });
+    }
+  },
+
+  buildZombies: function(room){
+    $.ajax({type: 'GET', url: 'room?id='+ZombieWorld.room._id}).done(function(room){
+      console.log('zombeis', room.zombies);
+      _.each(room.zombies, function(zombie){
+        if(!ZombieWorld.Zombies[zombie._id]){
+          ZombieWorld.Zombies[zombie._id] = ZombieWorld.Entities.zombie(zombie);
+        }
+      });
     });
   },
 

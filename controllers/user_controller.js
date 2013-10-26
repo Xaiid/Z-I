@@ -26,7 +26,6 @@ module.exports = {
     //Search for room available
     Room.findOne({$where: 'this.players.length < 4'}).exec(function(err, currentRoom){
 
-      var numOfZombies = config.level1.zombiesPerPlayer;
       var room = currentRoom || new Room({
         players: [],
         zombies: [],
@@ -36,22 +35,7 @@ module.exports = {
       // Link user with room
       var data = { roomID: room.id };
 
-      if(!currentRoom){
-        data.player = 'ZombieController'; 
-      }else{
-        //Assign zombies per user to room
-
-        var zombies = [];
-
-        for(var i=0; i < numOfZombies; i++){
-          zombies.push('zombie' + _.random(1,3));
-        }
-
-        _.each(zombies, function(zombie){
-          _.extend(config[zombie], {_id: utilities.guid()});
-          room.zombies.push(config[zombie]);
-        });
-      }
+      if(!currentRoom){ data.player = 'ZombieController'; }
 
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
         room.players.push(_.pick(userUpdated, 'username', '_id', 'player', 'waiting', 'alive', 'x', 'y'));
@@ -67,6 +51,33 @@ module.exports = {
 
     Room.findOne({id: id}).exec(function(err, room){
       res.send(room);
+    });
+
+  },
+
+  updateRoom: function(req, res){
+    var room = req.body;
+    var numOfZombies = config.level1.zombiesPerPlayer;
+
+    var zombies = [];
+
+    _.each(room.players, function(){
+      for(var i=0; i < numOfZombies; i++){
+        zombies.push('zombie' + _.random(1,3));
+      }
+    });
+
+    zombies = _.map(zombies, function(zombie, index){
+      return _.extend(config[zombie], {
+        _id: utilities.guid(),
+        x:30 * index,
+        y:100
+      });
+    });
+
+    Room.findOneAndUpdate({_id: room._id}, {zombies: zombies}, function(err, updatedRoom){
+      if(err){return res.send(400, err);}
+      res.send('room updated');
     });
 
   }

@@ -5,10 +5,13 @@ ZombieWorld.Controller.playerController = {
     ZombieWorld.room  = JSON.parse(localStorage.getItem('room'));
     user.type = user.player;
 
+
     var getPlayerConf = $.ajax({type: 'GET', url: '/configuration?q='+user.type});
 
     ZombieWorld.currentPlayer = user;
+
     ZombieWorld.socket.emit('new player', {user: user._id, room: ZombieWorld.room._id});
+    ZombieWorld.socket.emit('create zombies', {room: ZombieWorld.room._id});
 
     getPlayerConf.done(this.setPlayer);
     getPlayerConf.error(ZombieWorld.onError);

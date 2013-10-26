@@ -8,6 +8,7 @@ module.exports = function(app){
 
   //Game actions
   app.post('/user/create', user_controller.create.bind(user_controller));
+  app.put('/room', user_controller.updateRoom.bind(user_controller));
   app.get('/room', user_controller.getRoom.bind(user_controller));
 
   app.get('/configuration', function(req, res){
