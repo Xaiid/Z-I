@@ -1,7 +1,8 @@
 ZombieWorld.Controller.socketController = {
 
   events: { 
-    'new player': 'newPlayer'
+    'new player': 'newPlayer',
+    'Move player': 'move'
   },
 
   init: function(){
@@ -23,14 +24,41 @@ ZombieWorld.Controller.socketController = {
         return player._id === playerID;
       });
 
+      console.log(newPlayer);
+
       if(!ZombieWorld.Players[playerID] && newPlayer.player !== 'ZombieController'){
-        console.log(newPlayer);
         newPlayer.type = newPlayer.player;
         newPlayer.Entity = ZombieWorld.Entities.player(newPlayer);
         ZombieWorld.Players[playerID] = newPlayer;
       }
 
     });
+  },
+
+  move: function(data){
+    var player = ZombieWorld.Players[data.player];
+    console.log(player);
+    if(player){
+      switch(data.to){
+
+        case 'LEFT_ARROW':
+          player.Entity.x-=player.Entity._speed;
+        break;
+
+        case 'RIGHT_ARROW':
+          player.Entity.x+=player.Entity._speed;
+        break;
+
+        case 'UP_ARROW':
+          player.Entity.y-=player.Entity._speed;
+        break;
+
+        case 'DOWN_ARROW':
+          player.Entity.y+=player.Entity._speed;
+        break;
+
+      }
+    }
   }
 
 };
