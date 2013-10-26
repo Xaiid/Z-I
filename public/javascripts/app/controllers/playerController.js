@@ -13,6 +13,8 @@ ZombieWorld.Controller.playerController = {
     getPlayerConf.done(this.setPlayer);
     getPlayerConf.error(ZombieWorld.onError);
 
+    this.loadTeam();
+
   },
 
   setPlayer: function(player){
@@ -54,6 +56,18 @@ ZombieWorld.Controller.playerController = {
       ZombieWorld.currentPlayer.player.Entity = Entity;
         
     }
+  },
+
+  loadTeam: function(){
+    _.each(ZombieWorld.room.players, function(player){
+      if(!ZombieWorld.Players[player._id] && player.player !== 'ZombieController'){
+        if(player._id !== ZombieWorld.currentPlayer._id){
+          player.type = player.player;
+          player.Entity = ZombieWorld.Entities.player(player);
+          ZombieWorld.Players[player._id] = player;
+        }
+      }
+    });
   }
 
 };

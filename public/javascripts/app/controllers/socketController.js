@@ -24,8 +24,6 @@ ZombieWorld.Controller.socketController = {
         return player._id === playerID;
       });
 
-      console.log(newPlayer);
-
       if(!ZombieWorld.Players[playerID] && newPlayer.player !== 'ZombieController'){
         newPlayer.type = newPlayer.player;
         newPlayer.Entity = ZombieWorld.Entities.player(newPlayer);
@@ -37,7 +35,6 @@ ZombieWorld.Controller.socketController = {
 
   move: function(data){
     var player = ZombieWorld.Players[data.player];
-    console.log(player);
     if(player){
       switch(data.to){
 
