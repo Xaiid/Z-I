@@ -14,8 +14,8 @@ var onError = function(err){
 module.exports = {
 
   create: function(req, res){
+    var numOfZombies = config.level1.zombiesPerPlayer;
     var user = req.body;
-
     //Set default values
     //TODO GET X and Y
     _.extend(user, { alive: true, waiting: false, x: 50, y:50});
@@ -35,7 +35,24 @@ module.exports = {
       // Link user with room
       var data = { roomID: room.id };
 
-      if(!currentRoom){ data.player = 'ZombieController'; }
+      if(!currentRoom){ 
+        data.player = 'ZombieController'; 
+      }else{
+        //Assign zombies per user to room
+
+        for(var i=0; i < numOfZombies; i++){
+
+          //Create  random zombie
+          var zombie = _.extend(config['zombie' + _.random(1,3)], {
+            _id: utilities.guid(),
+            x:30 * i,
+            y:100
+          });
+
+          //Add random zombie
+          room.zombies.push(zombie);
+        }
+      }
 
       User.findOneAndUpdate({_id: newUser.id}, data , function(err, userUpdated){
         room.players.push(_.pick(userUpdated, 'username', '_id', 'player', 'waiting', 'alive', 'x', 'y'));
@@ -56,29 +73,21 @@ module.exports = {
   },
 
   updateRoom: function(req, res){
-    var room = req.body;
-    var numOfZombies = config.level1.zombiesPerPlayer;
+    var roomID  = req.body.roomID;
+    var zombies = req.body.zombies;
 
-    var zombies = [];
+    Room.findOne({_id: roomID}, function(err, room){
+      if(err){ return res.send(400, err); }
+      if(!room){return res.send(400, 'room not found');}
 
-    _.each(room.players, function(){
-      for(var i=0; i < numOfZombies; i++){
-        zombies.push('zombie' + _.random(1,3));
-      }
-    });
-
-    zombies = _.map(zombies, function(zombie, index){
-      return _.extend(config[zombie], {
-        _id: utilities.guid(),
-        x:30 * index,
-        y:100
+      //Get new zombies created, just in case...
+      var newZombies = _.reject(room.zombies, function(zombie){
+        return _.findWhere(zombies, {_id: zombie._id});
       });
-    });
 
-    Room.findOneAndUpdate({_id: room._id}, {zombies: zombies}, function(err, updatedRoom){
-      if(err){return res.send(400, err);}
-      res.send('room updated');
+      room.zombies = _.uniq(newZombies, zombies);
+      room.save(onError);
+      res.send('updated zombies n.n');
     });
-
   }
 };
